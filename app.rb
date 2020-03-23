@@ -4,7 +4,7 @@ class Makers_Bnb < Sinatra::Base
 
 
   get '/' do
-    "Random Text"
+    erb :index
   end
 
   run! if app_file == $0

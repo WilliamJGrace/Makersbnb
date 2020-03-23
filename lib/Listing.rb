@@ -1,0 +1,8 @@
+class Listing do
+
+
+
+
+
+
+end
