@@ -11,7 +11,8 @@ class Makers_Bnb < Sinatra::Base
     listings = [
       "Lovely house",
       "Romantic get-away",
-      "Seaside cottage"
+      "Seaside cottage",
+      "pandemic and chill"
     ]
     listings.join
   end
