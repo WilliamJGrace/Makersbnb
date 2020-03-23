@@ -11,7 +11,15 @@ require File.join(File.dirname(__FILE__), '..', 'app.rb')
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
+require 'setup_test_database'
 
+ENV['ENVIRONMENT'] = 'test'
+
+RSpec.configure do |config| 
+  config.before(:each) do
+    setup_test_database
+  end
+end
 # tell Capybara about our app class
 Capybara.app = Makers_Bnb #What ever your class is called
 # Given that it is always loaded, you are encouraged to keep this file as
