@@ -5,6 +5,17 @@
     <title>All Spaces</title>
   </head>
   <body>
+    <h1>All listings</h1>
+<div class="main-spaces">
+    <% @listings.each do |list| %>
+
+    <div class="single-space">
+      <li><%= list %></li>
+    </div>
+
+
+       <% end %>
+</div>
 
   </body>
 </html>
