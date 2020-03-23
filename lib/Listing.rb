@@ -1,4 +1,4 @@
-class Listing do
+class Listing 
 
 
 
