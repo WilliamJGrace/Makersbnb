@@ -1,5 +1,5 @@
 require 'sinatra/base'
-
+require './lib/Listing'
 class Makers_Bnb < Sinatra::Base
 
 
@@ -25,13 +25,8 @@ class Makers_Bnb < Sinatra::Base
   end
 
   get '/listings' do
-    listings = [
-      "Lovely house",
-      "Romantic get-away",
-      "Seaside cottage",
-      "pandemic and chill"
-    ]
-    listings.join(',')
+    @listings = Listing.all
+    erb :listings
   end
 
   get '/listings/new' do
