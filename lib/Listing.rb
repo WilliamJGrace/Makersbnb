@@ -19,7 +19,7 @@ def self.all
     "Seaside cottage",
     "Pandemic and chill"
   ]
-  
+
   if ENV['ENVIRONMENT'] == 'test'
     connection = PG.connect(dbname: 'makersbnb_test')
   else
@@ -32,7 +32,7 @@ def self.all
       price: listing['price'], date_created: listing['date_created'], dates_available: ['dates_available'])
     end
   end
-  
+
   # Peter's testing
   def self.create(user_id:, name:, description:, price:, date_created:, dates_available:)
     if ENV['ENVIRONMENT'] == 'test'
