@@ -5,10 +5,14 @@
     <title>All Spaces</title>
   </head>
   <body>
+
+    <h1>Welcome, <%=@user.name%></h1>
+
     <h2>Book a space</h2>
     <div class="add-spaces">
       <button type="button" name="button">Add new listing</button>
     </div>
+
     <h1>All listings</h1>
 <div class="main-spaces">
     <% @listings.each do |list| %>

@@ -2,30 +2,23 @@ require 'sinatra/base'
 require './lib/Listing'
 require './lib/User'
 class Makers_Bnb < Sinatra::Base
-
+enable :sessions
 
   get '/' do
     erb :index
   end
 
-  # post request for signingup
-  post '/' do
-    # logic for signingup
-    redirect '/listings'
+  get '/users/new' do
+    erb :user_registration
   end
 
-  #login page
-  get '/login' do
-    erb :login
-  end
-
-  # post request for logging in
-  post '/login' do
-    # login for logging in
+  post '/create_user' do
+    session[:user] = User.create(email: params[:email], name: params[:name], username: params[:username], password: params[:password])
     redirect '/listings'
   end
 
   get '/listings' do
+    @user = session[:user]
     @listings = Listing.all
     erb :listings
   end
@@ -48,7 +41,16 @@ class Makers_Bnb < Sinatra::Base
     redirect '/listings'
   end
 
+  #login page
+  get '/login' do
+    erb :login
+  end
 
+  # post request for logging in
+  post '/login' do
+    # login for logging in
+    redirect '/listings'
+  end
   run! if app_file == $0
 
 end
