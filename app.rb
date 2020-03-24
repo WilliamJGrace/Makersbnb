@@ -39,15 +39,14 @@ enable :sessions
   end
   get '/listings' do
     #Look at this later
-    # Listing.create(id: params['id'], user_id: listing['user_id'], name: listing['name'], description: listing['description'],
-    # price: listing['price'], date_created: listing['date_created'], dates_available: ['dates_available'])
+    # Listing.create(user_id: params[:user_id], name: params[:name], description: params[:description], price: params[:price], date_created: params[:date_created], dates_available: [:dates_available])
     @user = User.find(session[:user_id]) if session[:user_id] != nil
     @listings = Listing.all
     erb :listings
   end
   get '/listings/:id/new' do
     @listings_id = params[:id]
-    erb :'new_space'
+    erb :new_space
   end
   post '/listings/:id/new' do
     # connection = PG.connect(dbname: 'makersbnb_test')
