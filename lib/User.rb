@@ -4,7 +4,7 @@ class User
 attr_reader :id, :email, :name, :username, :password
 
   def self.create(email:, name:, username:, password: )
-    if ENV['ENVIRONMENT'] == "test"
+    if ENV['ENVIROMENT'] == "test"
       connect = PG.connect(dbname: "makersbnb_test")
     else
       connect = PG.connect(dbname: "makersbnb")
@@ -19,6 +19,7 @@ attr_reader :id, :email, :name, :username, :password
     @name = name
     @username = username
     @password = password
+
   end
 
 end
