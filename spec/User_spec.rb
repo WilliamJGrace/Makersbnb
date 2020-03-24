@@ -36,5 +36,11 @@ describe User do
       expect(authenticated_user).to be_nil
 
     end
+
+    it 'returns nil when wrong password is inputed' do
+      user = User.create(email: "test@makers.com", name: "will", username: "will123", password: "password456")
+      authenticated_user = User.authenticate(username: 'will123', password: 'password459')
+      expect(authenticated_user).to be_nil
+    end
   end
 end
