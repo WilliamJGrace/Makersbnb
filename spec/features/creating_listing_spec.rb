@@ -1,5 +1,3 @@
-# require 'Listing'
-
 # feature 'Adding and viewing listings' do
 #   feature 'A user can add a listing and then view that listing' do
 #     scenario 'A listing is added to the listings page' do
