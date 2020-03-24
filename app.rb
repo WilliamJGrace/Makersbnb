@@ -26,6 +26,8 @@ class Makers_Bnb < Sinatra::Base
   end
 
   get '/listings' do
+    Listing.create(id: params['id'], user_id: listing['user_id'], name: listing['name'], description: listing['description'],
+      price: listing['price'], date_created: listing['date_created'], dates_available: ['dates_available'])
     @listings = Listing.all
     erb :listings
   end

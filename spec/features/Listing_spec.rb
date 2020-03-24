@@ -8,7 +8,7 @@ feature 'Adding and viewing listings' do
       visit '/listings'
       first('.listings').click_button "Add Listing"
 
-      expect(current_path).to eq "/listings/#{listing.id}/listings/add"
+      expect(current_path).to eq "/listings/new"
 
       fill_in 'listing', with: "This is a new listing"
       click_button 'Submit new listing'
