@@ -71,6 +71,16 @@ enable :sessions
     # login for logging in
     redirect '/listings'
   end
+
+  post '/sign-out' do
+    session.clear
+    redirect '/sign-out-page'  
+  end
+
+  get '/sign-out-page' do
+    erb :sign_out  
+  end
+
   run! if app_file == $0
 
 end
