@@ -1,15 +1,17 @@
 require 'pg'
+require 'bcrypt'
 
 class User
 attr_reader :id, :email, :name, :username, :password
 
   def self.create(email:, name:, username:, password: )
-    if ENV['ENVIRONMENT'] == 'test'
+    if ENV['ENVIRONMENT'] == "test"
       connect = PG.connect(dbname: "makersbnb_test")
     else
       connect = PG.connect(dbname: "makersbnb")
     end
-    result = connect.exec("INSERT INTO users(email, name, username, password) VALUES ('#{email}', '#{name}', '#{username}', '#{password}') RETURNING id, email, name, username, password;")
+    encrypted_password = BCrypt::Password.create(password)
+    result = connect.exec("INSERT INTO users(email, name, username, password) VALUES ('#{email}', '#{name}', '#{username}', '#{encrypted_password}') RETURNING id, email, name, username, password;")
     User.new(id: result[0]['id'], email: result[0]['email'],name: result[0]['name'], username: result[0]['username'], password: result[0]['password'])
   end
 
@@ -22,4 +24,26 @@ attr_reader :id, :email, :name, :username, :password
 
   end
 
+  def self.find(id)
+    if ENV['ENVIRONMENT'] == "test"
+      connect = PG.connect(dbname: "makersbnb_test")
+    else
+      connect = PG.connect(dbname: "makersbnb")
+    end
+    result = connect.exec("SELECT * FROM users WHERE id = '#{id}';")
+    User.new(id: result[0]['id'], email: result[0]['email'],name: result[0]['name'], username: result[0]['username'], password: result[0]['password'])
+  end
+
+  def self.authenticate(username:, password:) 
+    if ENV['ENVIRONMENT'] == "test"
+      connect = PG.connect(dbname: "makersbnb_test")
+    else
+      connect = PG.connect(dbname: "makersbnb")
+    end
+    result = connect.exec("SELECT * FROM users WHERE username = '#{username}';")
+    return unless result.any?
+    return unless BCrypt::Password.new(result[0]['password']) == password
+    
+    User.new(id: result[0]['id'], email: result[0]['email'], name: result[0]['name'], username: result[0]['username'], password: result[0]['password'])
+  end
 end
