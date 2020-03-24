@@ -1,4 +1,5 @@
 require 'pg'
+require 'bcrypt'
 
 class User
 attr_reader :id, :email, :name, :username, :password
@@ -9,7 +10,8 @@ attr_reader :id, :email, :name, :username, :password
     else
       connect = PG.connect(dbname: "makersbnb")
     end
-    result = connect.exec("INSERT INTO users(email, name, username, password) VALUES ('#{email}', '#{name}', '#{username}', '#{password}') RETURNING id, email, name, username, password;")
+    encrypted_password = BCrypt::Password.create(password)
+    result = connect.exec("INSERT INTO users(email, name, username, password) VALUES ('#{email}', '#{name}', '#{username}', '#{encrypted_password}') RETURNING id, email, name, username, password;")
     User.new(id: result[0]['id'], email: result[0]['email'],name: result[0]['name'], username: result[0]['username'], password: result[0]['password'])
   end
 
