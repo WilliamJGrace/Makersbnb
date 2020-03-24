@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>List a new space</title>
+  </head>
+  <body>
+   <form action="/listings/<%= @listings_id %>/new" method="POST">
+      <label>Add a new space</label><br>
+      <input type="text" name="name"><br>
+      <input type="text" name="description"><br>
+      <input type="date" name="date"><br>
+      <input type="submit" value="Submit"><br>
+    </form>
+  </body>
+</html>

@@ -24,7 +24,10 @@
 
     <h2>Book a space</h2>
     <div class="add-spaces">
-      <button type="button" name="button">Add new listing</button>
+      <form action="listings/new">
+        <button type="submit" >Add new listing</button>
+      </form>
+
     </div>
 
     <h1>All listings</h1>
@@ -32,7 +35,10 @@
     <% @listings.each do |list| %>
 
     <div class="single-space">
-      <li><%= list %></li>
+      <h2><%= list.name %> Price: £<%= list.price %> Available until: <%= list.dates_available%></h2>
+      <div class="space_description">
+          <%= list.description %>
+      </div>
     </div>
 
     
