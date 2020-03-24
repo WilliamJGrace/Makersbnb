@@ -5,8 +5,10 @@
     <title>All Spaces</title>
   </head>
   <body>
-
+    <% if @user %>
     <h1>Welcome, <%=@user.name%></h1>
+    <% end %>
+
 
     <h2>Book a space</h2>
     <div class="add-spaces">
