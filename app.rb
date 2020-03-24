@@ -1,11 +1,30 @@
 require 'sinatra/base'
 require './lib/Listing'
 require './lib/User'
+require 'sinatra/flash'
+
 class Makers_Bnb < Sinatra::Base
+  register Sinatra::Flash
+
 enable :sessions
 
   get '/' do
     erb :index
+  end
+
+  get '/login' do
+    erb :login
+  end
+
+  post '/authentication' do
+    user = User.authenticate(username: params[:username], password: params[:password])
+    if user
+      session[:user_id] = user.id
+      redirect '/listings'
+    else
+      flash[:notice] = 'Wrong username or password'
+      redirect '/login'
+    end
   end
 
   get '/users/new' do
@@ -19,7 +38,7 @@ enable :sessions
   end
 
   get '/listings' do
-    @user = User.find(session[:user_id])
+    @user = User.find(session[:user_id]) if session[:user_id] != nil
     @listings = Listing.all
     erb :listings
   end
@@ -52,6 +71,16 @@ enable :sessions
     # login for logging in
     redirect '/listings'
   end
+
+  post '/sign-out' do
+    session.clear
+    redirect '/sign-out-page'  
+  end
+
+  get '/sign-out-page' do
+    erb :sign_out  
+  end
+
   run! if app_file == $0
 
 end

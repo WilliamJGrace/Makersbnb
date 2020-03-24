@@ -5,8 +5,22 @@
     <title>All Spaces</title>
   </head>
   <body>
-
+    <% if @user %>
     <h1>Welcome, <%=@user.name%></h1>
+    <form action="/sign-out" method="POST">
+      <input type="submit" name="sign-out" id="sign-out" value="Sign out">
+    </form>
+    <% else %>
+    <form class="" action="/login" method="get">
+      <input type="submit" name="login-button" value="Log in">
+    </form>
+    <form class="" action="/users/new" method="get">
+      <input type="submit" name="signup-button" value="Sign up">
+    </form>
+
+
+    <% end %>
+
 
     <h2>Book a space</h2>
     <div class="add-spaces">
