@@ -8,6 +8,16 @@ enable :sessions
     erb :index
   end
 
+  get '/login' do
+    erb :login
+  end
+
+  post '/authentication' do
+    user = User.authenticate(username: params[:username], password: params[:password])
+    session[:user_id] = user.id
+    redirect '/listings'
+  end
+
   get '/users/new' do
     erb :user_registration
   end
