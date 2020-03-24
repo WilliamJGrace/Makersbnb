@@ -13,12 +13,13 @@ enable :sessions
   end
 
   post '/create_user' do
-    session[:user] = User.create(email: params[:email], name: params[:name], username: params[:username], password: params[:password])
+    user = User.create(email: params[:email], name: params[:name], username: params[:username], password: params[:password])
+    session[:user_id] = user.id
     redirect '/listings'
   end
 
   get '/listings' do
-    @user = session[:user]
+    @user = User.find(session[:user_id])
     @listings = Listing.all
     erb :listings
   end
