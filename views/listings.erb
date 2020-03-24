@@ -23,12 +23,16 @@
 
 
     <h2>Book a space</h2>
+    <% if @user %>
+
     <div class="add-spaces">
-      <form action="listings/new">
+      <form action="listings/<%=@user.id%>/new">
         <button type="submit" >Add new listing</button>
       </form>
 
     </div>
+    <% end %>
+
 
     <h1>All listings</h1>
 <div class="main-spaces">
@@ -41,7 +45,7 @@
       </div>
     </div>
 
-    
+
        <% end %>
     </div>
 

@@ -12,22 +12,25 @@ def initialize(id:, user_id:, name:, description:, price:, date_created:, dates_
   @dates_available = dates_available
 end
 
-def self.all
+  def self.all
+    if ENV['ENVIRONMENT'] == 'test'
+      connection = PG.connect(dbname: 'makersbnb_test')
+    else
+      connection = PG.connect(dbname: 'makersbnb')
+    end
+    # SRI'S Testing
+    result = connection.exec("SELECT * FROM listings")
+    # p result[0]
+    result.map do |listing|
+      p listing
+      p "HIHIRHIRHIHRIHRRHI"
 
-  if ENV['ENVIRONMENT'] == 'test'
-    connection = PG.connect(dbname: 'makersbnb_test')
-  else
-    connection = PG.connect(dbname: 'makersbnb')
-  end
-  # SRI'S Testing
-  result = connection.exec("SELECT * FROM listings")
-  result.map do |listing|
-    Listing.new(id: listing['id'], user_id: listing['user_id'], name: listing['name'], description: listing['description'],
-      price: listing['price'], date_created: listing['date_created'], dates_available: ['dates_available'])
+      Listing.new(id: listing['id'], user_id: listing['user_id'], name: listing['name'], description: listing['description'],
+        price: listing['price'], date_created: listing['date_created'], dates_available: listing['dates_available'])
     end
   end
 
-  # Peter's testing
+    # Peter's testing
   def self.create(user_id:, name:, description:, price:, date_created:, dates_available:)
     if ENV['ENVIRONMENT'] == 'test'
       connect = PG.connect(dbname: "makersbnb_test")

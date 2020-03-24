@@ -39,8 +39,8 @@ enable :sessions
   end
   get '/listings' do
     #Look at this later
-    Listing.create(id: params['id'], user_id: listing['user_id'], name: listing['name'], description: listing['description'],
-    price: listing['price'], date_created: listing['date_created'], dates_available: ['dates_available'])
+    # Listing.create(id: params['id'], user_id: listing['user_id'], name: listing['name'], description: listing['description'],
+    # price: listing['price'], date_created: listing['date_created'], dates_available: ['dates_available'])
     @user = User.find(session[:user_id]) if session[:user_id] != nil
     @listings = Listing.all
     erb :listings
@@ -50,9 +50,9 @@ enable :sessions
     erb :'new_space'
   end
   post '/listings/:id/new' do
-    connection = PG.connect(dbname: 'makersbnb_test')
-    connection.exec("INSERT INTO listings (user_id, name, description, price, date_created, dates_available) VALUES('#{params[:comment]}', '#{params[:id]}');")
-    #  ('#{user_id}', '#{name}', '#{description}', '#{price}', '#{date_created}', '#{dates_available}')
+    # connection = PG.connect(dbname: 'makersbnb_test')
+    # connection.exec("INSERT INTO listings (user_id, name, description, price, date_created, dates_available) VALUES('#{params[:comment]}', '#{params[:id]}');")
+    # #  ('#{user_id}', '#{name}', '#{description}', '#{price}', '#{date_created}', '#{dates_available}')
     redirect '/listings'
   end
   get '/listings/[:id]' do
@@ -64,7 +64,7 @@ enable :sessions
   end
 
 
-  
+
 
   # post request for logging in
   post '/login' do
@@ -74,11 +74,11 @@ enable :sessions
 
   post '/sign-out' do
     session.clear
-    redirect '/sign-out-page'  
+    redirect '/sign-out-page'
   end
 
   get '/sign-out-page' do
-    erb :sign_out  
+    erb :sign_out
   end
 
   run! if app_file == $0
