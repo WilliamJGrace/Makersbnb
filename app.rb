@@ -31,7 +31,7 @@ class Makers_Bnb < Sinatra::Base
   end
 
   get '/listings/new' do
-    erb(:new_space)
+    erb :new_space
   end
 
   post '/listings/new' do
@@ -40,7 +40,7 @@ class Makers_Bnb < Sinatra::Base
   end
 
   get '/listings/[:id]' do
-    erb(:space_desc)
+    erb :space_desc
   end
 
   post '/listings/[:id]' do
