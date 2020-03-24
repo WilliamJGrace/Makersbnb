@@ -13,12 +13,6 @@ def initialize(id:, user_id:, name:, description:, price:, date_created:, dates_
 end
 
 def self.all
-  [
-    "Lovely house",
-    "Romantic get-away",
-    "Seaside cottage",
-    "Pandemic and chill"
-  ]
 
   if ENV['ENVIRONMENT'] == 'test'
     connection = PG.connect(dbname: 'makersbnb_test')

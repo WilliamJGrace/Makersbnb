@@ -5,8 +5,12 @@
     <title>List a new space</title>
   </head>
   <body>
-    <form class="" action="index.html" method="post">
-      <input type="text" name="" value="">
+   <form action="/listings/<%= @listings_id %>/new" method="POST">
+      <label>Add a new space</label><br>
+      <input type="text" name="name"><br>
+      <input type="text" name="description"><br>
+      <input type="date" name="date"><br>
+      <input type="submit" value="Submit"><br>
     </form>
   </body>
 </html>
