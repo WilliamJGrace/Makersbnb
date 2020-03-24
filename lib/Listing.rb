@@ -40,7 +40,7 @@ def self.all
     else
       connect = PG.connect(dbname: "makersbnb")
     end
-    result = connect.exec("INSERT INTO listings(user_id, name, description, price, date_created, dates_available) VALUES ('#{user_id}', '#{name}', '#{description}', '#{price}', '#{date_created}', '#{dates_available}') RETURNING id, user_id, name, description, price, date_created, dates_available ;")
+    result = connect.exec("INSERT INTO listings(user_id, name, description, price, date_created, dates_available) VALUES ('#{user_id}', '#{name}', '#{description}', '#{price}', '#{date_created}', '#{dates_available}') RETURNING id, user_id, name, description, price, date_created, dates_available;")
     Listing.new(id: result[0]['id'], user_id: result[0]['user_id'], name: result[0]['name'], description: result[0]['description'], price: result[0]['price'], date_created: result[0]['date_created'], dates_available: result[0]['dates_available'])
   end
 
