@@ -7,9 +7,13 @@
   <body>
    <form action="/listings/<%= @user_id %>/new" method="POST">
       <label>Add a new space</label><br>
+      <label>name your space:</label>
       <input type="text" name="name"><br>
+      <label>Description:</label>
       <input type="text" name="description"><br>
+      <label>Price</label>
       <input type="text" name="price"><br>
+      <label>dates available</label>
       <input type="date" name="dates_available"><br>
       <input type="submit" value="Submit"><br>
     </form>
