@@ -1,0 +1,1 @@
+CREATE TABLE requests(id SERIAL PRIMARY KEY, listing_user_id INTEGER REFERENCES users (id), requester_user_id INTEGER REFERENCES users (id), listing_id INTEGER REFERENCES listings (id), name VARCHAR(60), description VARCHAR(255), price DECIMAL(10,2), dates_booked VARCHAR(60));
