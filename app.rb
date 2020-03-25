@@ -62,8 +62,13 @@ enable :sessions
     redirect '/listings'
   end
 
+post '/listings/[:id]/request' do
 
+end
 
+get '/listings/[:id]/request' do
+  erb :book_space
+end
 
   # post request for logging in
   post '/login' do
