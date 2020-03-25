@@ -27,7 +27,7 @@
 
     <div class="add-spaces">
       <form action="listings/<%=@user.id%>/new">
-        <button type="submit" >Add new listing</button>
+        <button type="submit" >Add Listing</button>
       </form>
 
     </div>
@@ -38,15 +38,21 @@
 <div class="main-spaces">
     <% @listings.each do |list| %>
 
-    <div class="single-space">
+    <div class="listing" id="listing-<%= list.id %>">
       <h2><%= list.name %> Price: £<%= list.price %> Available until: <%= list.dates_available%></h2>
       <div class="space_description">
           <%= list.description %>
       </div>
+      <% if @user %>
+        <% if @user.id == list.user_id %>
+      <form action="/listings/<%= list.id %>/<%= @user.id %>/edit" method="get">
+        <input type="submit" value="edit listing" />
+      </form>
+        <% end %>
+      <% end %>
       <div class="request-spaces">
         <form method="post" action="listings/<%=list.id%>/request">
           <input type="text" id="dates_booked" name="dates_booked">
-          <!-- <input type="hidden" id="list_id" name="list_id" value="<%=list.id%>"> -->
           <input type="submit" value="Request this listing">
         </form>
     </div>

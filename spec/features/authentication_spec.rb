@@ -17,7 +17,6 @@ feature 'authentication' do
     fill_in(:username, with: 'testing123')
     fill_in(:password, with: 'password456')
     click_button('Sign in')
-    
     click_button('Sign out') 
 
     expect(page).not_to have_content 'Welcome, test'
