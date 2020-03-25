@@ -24,8 +24,6 @@ describe Listing do
       expect(updated_listing.id).to eq listing.id
       expect(updated_listing).to be_a Listing
       expect(updated_listing.user_id).to eq user.id
-
-
     end
   end
 end
