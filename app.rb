@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require './lib/Listing'
 require './lib/User'
+require './lib/requests'
 require 'pg'
 require 'sinatra/flash'
 
@@ -50,9 +51,7 @@ enable :sessions
   end
   post '/listings/:id/new' do
     Listing.create(user_id: params[:id],name: params[:name],description: params[:description],price: params[:price],dates_available: params[:dates_available])
-    # connection = PG.connect(dbname: 'makersbnb_test')
-    #
-    # connection.exec("INSERT INTO listings (user_id, name, description, price, date_created, dates_available) VALUES('#{params[:id]}', '#{params[:name]}', '#{params[:description]}', '#{params[:price]}', '#{Time.now}', '#{params[:dates_available]}');")
+
     redirect '/listings'
   end
 
@@ -76,9 +75,22 @@ enable :sessions
     redirect '/listings'
   end
 
+
+  post '/listings/:id/request' do
+    current_session_user = User.find(session[:user_id])
+    current_listing = Listing.find(params[:id]) 
+    request = Requests.create(listing_user_id: current_listing.user_id, requester_user_id: session[:user_id], listing_id: current_listing.id, name: current_listing.name, description: current_listing.description, price: current_listing.price, dates_booked: params[:dates_booked])
+    redirect '/listings/requested'
+  end
+
+  get '/listings/requested' do
+    erb :book_space
+  end
+
   # post request for logging in
   post '/login' do
     # login for logging in
+    
     redirect '/listings'
   end
 
