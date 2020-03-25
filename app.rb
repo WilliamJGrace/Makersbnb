@@ -8,7 +8,7 @@ require 'sinatra/flash'
 class Makers_Bnb < Sinatra::Base
   register Sinatra::Flash
 
-enable :sessions
+  enable :sessions
 
   get '/' do
     erb :index
@@ -38,17 +38,18 @@ enable :sessions
     session[:user_id] = user.id
     redirect '/listings'
   end
+
   get '/listings' do
-    #Look at this later
-    # Listing.create(user_id: params[:user_id], name: params[:name], description: params[:description], price: params[:price], date_created: params[:date_created], dates_available: [:dates_available])
     @user = User.find(session[:user_id]) if session[:user_id] != nil
     @listings = Listing.all
     erb :listings
   end
+
   get '/listings/:id/new' do
     @user_id = params[:id]
     erb :new_space
   end
+
   post '/listings/:id/new' do
     Listing.create(user_id: params[:id],name: params[:name],description: params[:description],price: params[:price],dates_available: params[:dates_available])
 
@@ -61,38 +62,22 @@ enable :sessions
     erb :edit_listing
   end
 
+  post '/listings/:id/request' do
+    current_session_user = User.find(session[:user_id])
+    current_listing = Listing.find(params[:id])
+    request = Requests.create(listing_user_id: current_listing.user_id, requester_user_id: session[:user_id], listing_id: current_listing.id, name: current_listing.name, description: current_listing.description, price: current_listing.price, dates_booked: params[:dates_booked])
+    redirect '/listings/requested'
+  end
+
   post '/listings/:listing_id/:user_id' do
     Listing.update(id: params[:listing_id], name: params[:name], description: params[:description], price: params[:price], dates_available: params[:dates_available])
     redirect ('/listings')
-  end
-
-  get '/listings/:id' do
-    erb :space_desc
-  end
-
-  post '/listings/[:id]' do
-    # logic for storing request
-    redirect '/listings'
-  end
-
-
-  post '/listings/:id/request' do
-    current_session_user = User.find(session[:user_id])
-    current_listing = Listing.find(params[:id]) 
-    request = Requests.create(listing_user_id: current_listing.user_id, requester_user_id: session[:user_id], listing_id: current_listing.id, name: current_listing.name, description: current_listing.description, price: current_listing.price, dates_booked: params[:dates_booked])
-    redirect '/listings/requested'
   end
 
   get '/listings/requested' do
     erb :book_space
   end
 
-  # post request for logging in
-  post '/login' do
-    # login for logging in
-    
-    redirect '/listings'
-  end
 
   post '/sign-out' do
     session.clear
