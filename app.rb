@@ -63,19 +63,21 @@ enable :sessions
     redirect '/listings'
   end
 
-  post '/listings/[:id]/request' do
-    # @current_session_user = User.find(session[:user_id])
-    # @current_listing = Listing.find(#how do we do this?!?!?)
-    # request = Requests.create(@current_listing.user_id, session[:user_id], @current_listing.id, @current_listing.name, @current_listing.description, @current_listing.price, params[:dates_booked])
+  post '/listings/:id/request' do
+    current_session_user = User.find(session[:user_id])
+    current_listing = Listing.find(params[:id]) 
+    request = Requests.create(listing_user_id: current_listing.user_id, requester_user_id: session[:user_id], listing_id: current_listing.id, name: current_listing.name, description: current_listing.description, price: current_listing.price, dates_booked: params[:dates_booked])
+    redirect '/listings/requested'
   end
 
-  get '/listings/[:id]/request' do
+  get '/listings/requested' do
     erb :book_space
   end
 
   # post request for logging in
   post '/login' do
     # login for logging in
+    
     redirect '/listings'
   end
 
