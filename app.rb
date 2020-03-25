@@ -45,25 +45,22 @@ enable :sessions
     erb :listings
   end
   get '/listings/:id/new' do
-    @listings_id = params[:id]
+    @user_id = params[:id]
     erb :new_space
   end
   post '/listings/:id/new' do
-    # connection = PG.connect(dbname: 'makersbnb_test')
-    # connection.exec("INSERT INTO listings (user_id, name, description, price, date_created, dates_available) VALUES('#{params[:comment]}', '#{params[:id]}');")
-    # #  ('#{user_id}', '#{name}', '#{description}', '#{price}', '#{date_created}', '#{dates_available}')
+    connection = PG.connect(dbname: 'makersbnb_test')
+    connection.exec("INSERT INTO listings (user_id, name, description, price, date_created, dates_available) VALUES('#{params[:id]}', '#{params[:name]}', '#{params[:description]}', '#{params[:price]}', '#{Time.now}', '#{params[:dates_available]}');")                                                                                         
     redirect '/listings'
   end
   get '/listings/[:id]' do
     erb :space_desc
   end
+  
   post '/listings/[:id]' do
     # logic for storing request
     redirect '/listings'
   end
-
-
-
 
   # post request for logging in
   post '/login' do

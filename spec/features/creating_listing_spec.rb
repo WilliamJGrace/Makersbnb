@@ -1,12 +1,20 @@
-# feature 'Creating listings' do
-#     scenario 'A listing is added to the listings page' do
-#       visit('/listings')
-#       # create(user_id:, name:, description:, price:, date_created:, dates_available:)
-#       first('.listings').click_button "Add Listing"
-#       expect(current_path).to eq "/listings/#{listings.id}/new"
-#       fill_in 'listing', with: "This is a new listing"
-#       click_button 'Submit'
-#       expect(current_path).to eq '/listings'
-#       expect(first('.listings')).to have_content "This is a test listing"
-#     end
-#   end
+feature 'Creating listings' do
+    scenario 'A listing is added to the listings page' do
+      user = User.create(email: 'test@example.com', name: 'test', username: 'testing123', password: 'password456')
+      visit '/login'
+      fill_in(:username, with: 'testing123')
+      fill_in(:password, with: 'password456')
+      click_button('Sign in')
+      visit('/listings')
+      click_button "Add Listing"
+      expect(current_path).to eq "/listings/#{user.id}/new"
+      fill_in 'name', with: "This is a new listing"
+      fill_in 'description', with: "Lovely cottage"
+      fill_in 'price', with: "700.00"
+      fill_in 'dates_available', with: "24/03/2020"
+      
+      click_button 'Submit'
+      expect(current_path).to eq '/listings'
+      expect(page).to have_content "This is a new listing"
+    end
+  end

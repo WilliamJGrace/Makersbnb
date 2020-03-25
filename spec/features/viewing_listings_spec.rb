@@ -15,9 +15,3 @@ end
 
 
 
-# @listings = [
-#   "Lovely house",
-#   "Romantic get-away",
-#   "Seaside cottage",
-#   "Pandemic and chill"
-# ]

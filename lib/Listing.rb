@@ -18,12 +18,11 @@ end
     else
       connection = PG.connect(dbname: 'makersbnb')
     end
-    # SRI'S Testing
+  
     result = connection.exec("SELECT * FROM listings")
-    # p result[0]
+    
     result.map do |listing|
-      p listing
-      p "HIHIRHIRHIHRIHRRHI"
+      
 
       Listing.new(id: listing['id'], user_id: listing['user_id'], name: listing['name'], description: listing['description'],
         price: listing['price'], date_created: listing['date_created'], dates_available: listing['dates_available'])
