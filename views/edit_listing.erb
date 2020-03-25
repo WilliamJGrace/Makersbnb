@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>List a new space</title>
+  </head>
+  <body>
+   <form action="/listings/<%= @listing_id %>/<%= @user_id %>" method="POST">
+     <input type="hidden" name="_method" value="PATCH" />
+
+      <label>Edit your space</label><br>
+      <label>name</label>
+      <input type="text" name="name"><br>
+      <label>Description:</label>
+      <input type="text" name="description"><br>
+      <label>Price</label>
+      <input type="text" name="price"><br>
+      <label>dates available</label>
+      <input type="date" name="dates_available"><br>
+      <input type="submit" value="Submit"><br>
+    </form>
+  </body>
+</html>

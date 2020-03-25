@@ -55,7 +55,19 @@ enable :sessions
     # connection.exec("INSERT INTO listings (user_id, name, description, price, date_created, dates_available) VALUES('#{params[:id]}', '#{params[:name]}', '#{params[:description]}', '#{params[:price]}', '#{Time.now}', '#{params[:dates_available]}');")
     redirect '/listings'
   end
-  get '/listings/[:id]' do
+
+  get '/listings/:listing_id/:user_id/edit' do
+    @user_id = params[:user_id]
+    @listing_id = params[:listing_id]
+    erb :edit_listing
+  end
+
+  post '/listings/:listing_id/:user_id' do
+    Listing.update(id: params[:listing_id], name: params[:name], description: params[:description], price: params[:price], dates_available: params[:dates_available])
+    redirect ('/listings')
+  end
+
+  get '/listings/:id' do
     erb :space_desc
   end
 

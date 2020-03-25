@@ -38,11 +38,18 @@
 <div class="main-spaces">
     <% @listings.each do |list| %>
 
-    <div class="single-space">
+    <div class="listing" id="listing-<%= list.id %>">
       <h2><%= list.name %> Price: £<%= list.price %> Available until: <%= list.dates_available%></h2>
       <div class="space_description">
           <%= list.description %>
       </div>
+      <% if @user %>
+        <% if @user.id == list.user_id %>
+      <form action="/listings/<%= list.id %>/<%= @user.id %>/edit" method="get">
+        <input type="submit" value="edit listing" />
+      </form>
+        <% end %>
+      <% end %>
     </div>
 
 
