@@ -43,6 +43,11 @@
       <div class="space_description">
           <%= list.description %>
       </div>
+      <div class="request-spaces">
+        <form method="post" action="listings/<%=@listings.id%>/request">
+          <button type="submit" >Add new listing</button>
+        </form>
+    </div>
     </div>
 
 
