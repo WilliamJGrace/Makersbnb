@@ -8,7 +8,7 @@ require 'sinatra/flash'
 class Makers_Bnb < Sinatra::Base
   register Sinatra::Flash
 
-  enable :sessions
+  enable :sessions, :method_override
 
   get '/' do
     erb :index
@@ -56,6 +56,11 @@ class Makers_Bnb < Sinatra::Base
     redirect '/listings'
   end
 
+  delete '/listings/:listing_id/:user_id/delete' do
+    Listing.delete(id: params[:listing_id])
+    redirect '/listings'
+  end
+
   get '/listings/:listing_id/:user_id/edit' do
     @user_id = params[:user_id]
     @listing_id = params[:listing_id]
@@ -69,7 +74,7 @@ class Makers_Bnb < Sinatra::Base
     redirect '/listings/requested'
   end
 
-  post '/listings/:listing_id/:user_id' do
+  patch '/listings/:listing_id/:user_id' do
     Listing.update(id: params[:listing_id], name: params[:name], description: params[:description], price: params[:price], dates_available: params[:dates_available])
     redirect ('/listings')
   end
@@ -77,6 +82,7 @@ class Makers_Bnb < Sinatra::Base
   get '/listings/requested' do
     erb :book_space
   end
+
 
 
   post '/sign-out' do

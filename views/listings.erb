@@ -59,7 +59,14 @@
     </div>
     <% end %>
     </div>
-
+    <% if @user %>
+      <% if @user.id == list.user_id %>
+    <form action="/listings/<%= list.id %>/<%= @user.id %>/delete" method="post">
+      <input type='hidden' name='_method' value='DELETE'/>
+      <input type="submit" value="Delete" />
+    </form>
+      <% end %>
+    <% end %>
 
        <% end %>
     </div>
