@@ -19,11 +19,9 @@ attr_reader :id, :listing_user_id, :requester_user_id, :listing_id, :name, :desc
     else
       connection = PG.connect(dbname: 'makersbnb')
     end
-
     result = connection.exec("SELECT * FROM requests")
-
     result.map do |request|
-      Requests.new(id: result[0]['id'], listing_user_id: result[0]['listing_user_id'], requester_user_id: result[0]['requester_user_id'], listing_id: result[0]['listing_id'], name: result[0]['name'], description: result[0]['description'], price: result[0]['price'], dates_booked: result[0]['dates_booked'])
+      Requests.new(id: request['id'], listing_user_id: request['listing_user_id'], requester_user_id: request['requester_user_id'], listing_id: request['listing_id'], name: request['name'], description: request['description'], price: request['price'], dates_booked: request['dates_booked'])
     end
   end
 
