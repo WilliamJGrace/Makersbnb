@@ -11,8 +11,37 @@
         <% if @user.id == request.requester_user_id %>
         <h1><%= request.name %></h1>
         <h3><%= request.description %></h3>
+        <h4><% if request.isConfirmed == "f" %>
+                Not Confirmed
+            <% else %>
+                Confirmed
+            <% end %>
+        </h4>
         <% end %>
       <% end %>
     <% end %>
+    <h1>Your Requested Properties:</h1>
+    <% @requests.each do |request| %>
+    <% if @user %>
+      <% if @user.id == request.listing_user_id %>
+      <h1><%= request.name %></h1>
+      <h3><%= request.description %></h3>
+      <h3><%= request.dates_booked %></h3>
+      <h4><%if request.isConfirmed == "f" %>
+              Not Confirmed
+          <% else %>
+              Your Booking is confirmed
+          <% end %>
+
+        </h4>
+      <form action="/listings/<%= request.id %>/confirm-request" method="POST">
+        <input type="hidden" name="_method" value="PATCH" />
+        <input type="submit" name="accept_request" id="accept_request" value="Accept this request">
+      <form action="">
+        <input type="submit" name="deny_request" id="deny_request" value="Deny this request">
+      </form>
+      <% end %>
+    <% end %>
+  <% end %>
   </body>
 </html>
