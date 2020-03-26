@@ -5,18 +5,18 @@
     <title>List a new space</title>
   </head>
   <body>
-   <form action="/listings/<%= @listing_id %>/<%= @user_id %>" method="POST">
+   <form action="/listings/<%= @listing.id %>/<%= @user_id %>" method="POST">
      <input type="hidden" name="_method" value="PATCH" />
 
       <label>Edit your space</label><br>
       <label>name</label>
-      <input type="text" name="name"><br>
+      <input type="text" name="name" value="<%= @listing.name %>"><br>
       <label>Description:</label>
-      <input type="text" name="description"><br>
+      <input type="text" name="description" value="<%= @listing.description %>"><br>
       <label>Price</label>
-      <input type="text" name="price"><br>
+      <input type="number" min="1" step="any" name="price" value="<%= @listing.price %>"><br>
       <label>dates available</label>
-      <input type="date" name="dates_available"><br>
+      <input type="date" name="dates_available" "<%= @listing.dates_available %>"><br>
       <input type="submit" value="Submit"><br>
     </form>
   </body>
