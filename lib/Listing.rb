@@ -1,16 +1,17 @@
 require 'pg'
+
 class Listing
 attr_reader :id, :user_id, :name, :description, :price, :date_created, :dates_available
 
-def initialize(id:, user_id:, name:, description:, price:, date_created:, dates_available:)
-  @id = id
-  @user_id = user_id
-  @name = name
-  @description = description
-  @price = price
-  @date_created = date_created
-  @dates_available = dates_available
-end
+  def initialize(id:, user_id:, name:, description:, price:, date_created:, dates_available:)
+    @id = id
+    @user_id = user_id
+    @name = name
+    @description = description
+    @price = price
+    @date_created = date_created
+    @dates_available = dates_available
+  end
 
   def self.all
     if ENV['ENVIRONMENT'] == 'test'
@@ -41,7 +42,7 @@ end
 
   def self.update(id:, name:, description:, price:, dates_available:)
     if ENV['ENVIRONMENT'] == 'test'
-       connect = PG.connect(dbname: "makersbnb_test")
+        connect = PG.connect(dbname: "makersbnb_test")
     else
       connect = PG.connect(dbname: "makersbnb")
     end
@@ -50,9 +51,9 @@ end
   end
 
   def self.find(list_id)
-   if ENV['ENVIRONMENT'] == 'test'
-       connect = PG.connect(dbname: "makersbnb_test")
-   else
+    if ENV['ENVIRONMENT'] == 'test'
+        connect = PG.connect(dbname: "makersbnb_test")
+    else
       connect = PG.connect(dbname: "makersbnb")
    end
    result = connect.exec("SELECT * FROM listings WHERE id = '#{list_id}';")
@@ -61,10 +62,10 @@ end
 
   def self.delete(id:)
     if ENV['ENVIRONMENT'] == 'test'
-  connection = PG.connect(dbname: 'makersbnb_test')
-else
-  connection = PG.connect(dbname: 'makersbnb')
-end
-  connection.exec("DELETE FROM listings WHERE id ='#{id}'; ")
-end
+      connection = PG.connect(dbname: 'makersbnb_test')
+    else
+      connection = PG.connect(dbname: 'makersbnb')
+    end
+    connection.exec("DELETE FROM listings WHERE id ='#{id}'; ")
+  end
 end

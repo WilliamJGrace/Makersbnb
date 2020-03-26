@@ -35,8 +35,13 @@ class Makers_Bnb < Sinatra::Base
 
   post '/create_user' do
     user = User.create(email: params[:email], name: params[:name], username: params[:username], password: params[:password])
-    session[:user_id] = user.id
-    redirect '/listings'
+    if user
+      session[:user_id] = user.id
+      redirect '/listings'
+    else
+      flash[:notice] = 'username already taken'
+      redirect '/users/new'
+    end
   end
 
   get '/listings' do
@@ -63,7 +68,7 @@ class Makers_Bnb < Sinatra::Base
 
   get '/listings/:listing_id/:user_id/edit' do
     @user_id = params[:user_id]
-    @listing_id = params[:listing_id]
+    @listing = Listing.find(params[:listing_id])
     erb :edit_listing
   end
 
@@ -71,9 +76,16 @@ class Makers_Bnb < Sinatra::Base
     current_session_user = User.find(session[:user_id])
     current_listing = Listing.find(params[:id])
     request = Requests.create(listing_user_id: current_listing.user_id, requester_user_id: session[:user_id], listing_id: current_listing.id, name: current_listing.name, description: current_listing.description, price: current_listing.price, dates_booked: params[:dates_booked])
-    redirect '/listings/requested'
+    redirect '/listings/my-requests'
   end
 
+
+  get '/listings/my-requests' do
+    @user = User.find(session[:user_id])
+    @requests = Requests.all
+    erb :my_bookings
+  end
+  
   patch '/listings/:listing_id/:user_id' do
     Listing.update(id: params[:listing_id], name: params[:name], description: params[:description], price: params[:price], dates_available: params[:dates_available])
     redirect ('/listings')
@@ -83,8 +95,6 @@ class Makers_Bnb < Sinatra::Base
     erb :book_space
   end
 
-
-
   post '/sign-out' do
     session.clear
     redirect '/sign-out-page'
@@ -93,6 +103,7 @@ class Makers_Bnb < Sinatra::Base
   get '/sign-out-page' do
     erb :sign_out
   end
+
 
   run! if app_file == $0
 end
