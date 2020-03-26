@@ -33,4 +33,15 @@ describe Requests do
       expect(request[0].dates_booked).to eq "01/01/01 - 02/02/02"
     end
   end
+
+  describe '.confirm_booking' do
+    it "can confirm a request to a booking" do
+      user = User.create(email: "test@makers.com", name: "will", username: "will123", password: "password456")
+      listing = Listing.create(user_id: user.id, name: "Peter Stevens", description: "Pandemic and chill, £100.00 a night", price: 700, dates_available: "2020/03/31", img_url: "https://www.carehome.co.uk/photos/gallery/large/10002514BREA-1.jpg")
+      request = Requests.create(listing_user_id: user.id, requester_user_id: user.id, listing_id: listing.id, name: listing.name, description: listing.description, price: listing.price, dates_booked: '01/01/01 - 02/02/02')
+      confirmed_booking = Requests.confirm_booking(id: request.id)
+      expect(confirmed_booking.isConfirmed).to eq "t"
+    end
+
+  end
 end
