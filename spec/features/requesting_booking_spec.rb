@@ -10,6 +10,6 @@ feature 'requesting booking' do
     visit('/listings')
     
     click_button('Request this listing')
-    expect(page).to have_content("Hello")
+    expect(page).to have_content("Your Requests:")
   end
 end
