@@ -56,7 +56,7 @@ class Makers_Bnb < Sinatra::Base
   end
 
   post '/listings/:id/new' do
-    Listing.create(user_id: params[:id],name: params[:name],description: params[:description],price: params[:price],dates_available: params[:dates_available])
+    Listing.create(user_id: params[:id],name: params[:name],description: params[:description],price: params[:price],dates_available: params[:dates_available], img_url: params[:img_url])
 
     redirect '/listings'
   end
@@ -97,7 +97,7 @@ class Makers_Bnb < Sinatra::Base
   end
 
   patch '/listings/:listing_id/:user_id' do
-    Listing.update(id: params[:listing_id], name: params[:name], description: params[:description], price: params[:price], dates_available: params[:dates_available])
+    Listing.update(id: params[:listing_id], name: params[:name], description: params[:description], price: params[:price], dates_available: params[:dates_available], img_url: params[:img_url])
     redirect ('/listings')
   end
 

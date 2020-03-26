@@ -11,6 +11,7 @@
         <% if @user.id == request.requester_user_id %>
         <h1><%= request.name %></h1>
         <h3><%= request.description %></h3>
+        <h3><%= request.dates_booked %></h3>
         <h4><% if request.isConfirmed == "f" %>
                 Not Confirmed
             <% else %>
