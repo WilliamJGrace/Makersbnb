@@ -66,6 +66,8 @@ attr_reader :id, :user_id, :name, :description, :price, :date_created, :dates_av
     else
       connection = PG.connect(dbname: 'makersbnb')
     end
+    connection.exec("DELETE FROM requests WHERE listing_id ='#{id}'; ")
     connection.exec("DELETE FROM listings WHERE id ='#{id}'; ")
+
   end
 end
