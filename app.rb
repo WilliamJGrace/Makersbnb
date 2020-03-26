@@ -66,18 +66,19 @@ class Makers_Bnb < Sinatra::Base
     current_session_user = User.find(session[:user_id])
     current_listing = Listing.find(params[:id])
     request = Requests.create(listing_user_id: current_listing.user_id, requester_user_id: session[:user_id], listing_id: current_listing.id, name: current_listing.name, description: current_listing.description, price: current_listing.price, dates_booked: params[:dates_booked])
-    redirect '/listings/requested'
+    redirect '/listings/my-requests'
   end
 
+  get '/listings/my-requests' do
+    @user = User.find(session[:user_id])
+    @requests = Requests.all
+    erb :my_bookings
+  end
+  
   post '/listings/:listing_id/:user_id' do
     Listing.update(id: params[:listing_id], name: params[:name], description: params[:description], price: params[:price], dates_available: params[:dates_available])
     redirect ('/listings')
   end
-
-  get '/listings/requested' do
-    erb :book_space
-  end
-
 
   post '/sign-out' do
     session.clear
@@ -87,6 +88,7 @@ class Makers_Bnb < Sinatra::Base
   get '/sign-out-page' do
     erb :sign_out
   end
+
 
   run! if app_file == $0
 end

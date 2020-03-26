@@ -13,6 +13,18 @@ attr_reader :id, :listing_user_id, :requester_user_id, :listing_id, :name, :desc
     @dates_booked = dates_booked
   end
 
+  def self.all
+    if ENV['ENVIRONMENT'] == 'test'
+      connection = PG.connect(dbname: 'makersbnb_test')
+    else
+      connection = PG.connect(dbname: 'makersbnb')
+    end
+    result = connection.exec("SELECT * FROM requests")
+    result.map do |request|
+      Requests.new(id: request['id'], listing_user_id: request['listing_user_id'], requester_user_id: request['requester_user_id'], listing_id: request['listing_id'], name: request['name'], description: request['description'], price: request['price'], dates_booked: request['dates_booked'])
+    end
+  end
+
   def self.create(listing_user_id:, requester_user_id:, listing_id:, name:, description:, price:, dates_booked:)
     if ENV['ENVIRONMENT'] == 'test'
       connection = PG.connect(dbname: 'makersbnb_test')

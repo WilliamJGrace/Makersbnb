@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Your Requests:</h1>
+    <% @requests.each do |request| %>
+      <% if @user %>
+        <% if @user.id == request.requester_user_id %>
+        <h1><%= request.name %></h1>
+        <h3><%= request.description %></h3>
+        <% end %>
+      <% end %>
+    <% end %>
+  </body>
+</html>
