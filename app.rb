@@ -63,7 +63,7 @@ class Makers_Bnb < Sinatra::Base
 
   get '/listings/:listing_id/:user_id/edit' do
     @user_id = params[:user_id]
-    @listing_id = params[:listing_id]
+    @listing = Listing.find(params[:listing_id])
     erb :edit_listing
   end
 

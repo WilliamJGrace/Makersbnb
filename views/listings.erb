@@ -50,12 +50,14 @@
       </form>
         <% end %>
       <% end %>
+      <% if @user %>
       <div class="request-spaces">
         <form method="post" action="/listings/<%=list.id%>/request">
           <input type="text" id="dates_booked" name="dates_booked">
           <input type="submit" value="Request this listing">
         </form>
     </div>
+    <% end %>
     </div>
 
 
