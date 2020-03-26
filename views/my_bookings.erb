@@ -43,7 +43,7 @@
         <input type="hidden" name="_method" value="PATCH" />
         <input type="submit" name="accept_request" id="accept_request" value="Accept this request">
       </form>
-      <form action="/listings/<%= request.id %>/delete-request" method="POST">
+      <form action="/listings/<%= request.id %>/deny-request" method="POST">
         <input type='hidden' name='_method' value='DELETE'/>
         <input type="submit" name="deny_request" id="deny_request" value="Deny this request">
       </form>
