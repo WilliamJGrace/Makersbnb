@@ -26,4 +26,13 @@ describe Listing do
       expect(updated_listing.user_id).to eq user.id
     end
   end
+  describe ".delete" do
+    it "can delete a new listing" do
+      user = User.create(email: "test@makers.com", name: "will", username: "will123", password: "password456")
+      listing = Listing.create(user_id: user.id, name: "Peter Stevens", description: "Pandemic and chill, £100.00 a night", price: 700, dates_available: "2020/03/31")
+      listing = Listing.delete(id: listing.id)
+      expect(Listing.all.length).to eq 0
+
+    end
+end
 end
