@@ -12,7 +12,7 @@ feature 'Creating listings' do
       fill_in 'description', with: "Lovely cottage"
       fill_in 'price', with: "700.00"
       fill_in 'dates_available', with: "24/03/2020"
-      
+      fill_in 'img_url', with: "https://www.carehome.co.uk/photos/gallery/large/10002514BREA-1.jpg"
       click_button 'Submit'
       expect(current_path).to eq '/listings'
       expect(page).to have_content "This is a new listing"
