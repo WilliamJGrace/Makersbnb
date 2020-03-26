@@ -39,8 +39,9 @@
     <% @listings.each do |list| %>
 
     <div class="listing" id="listing-<%= list.id %>">
-       <img src="<%= list.img_url %>" >
+       
       <h2><%= list.name %> Price: £<%= list.price %> Available until: <%= list.dates_available%></h2>
+      <img src="<%= list.img_url %>" >
       <div class="space_description">
           <%= list.description %>
       </div>
