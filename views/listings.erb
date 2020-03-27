@@ -3,34 +3,41 @@
   <head>
     <meta charset="utf-8">
     <title>All Spaces</title>
+    <link rel='stylesheet' type='text/css' href='style-listings.css'>
   </head>
   
-  <body class="background">
-    <div class="please">
-    <link rel='stylesheet' type='text/css' href='style-listings.css'>
+  <body>
+    <!-- <div class="background_image"><img src="https://i.pinimg.com/originals/ba/ef/ce/baefcefd89c64d7232df82a919007848.jpg" alt=""></div> -->
+    
       <% if @user %>
-        <h1>Welcome, <%=(@user.name).capitalize%></h1>
-          <form action="/sign-out" method="POST">
-            <div class="button">
-              <input type="submit" name="sign-out" id="sign-out" value="Sign out">
-            </div>
-          </form>
-          <form class="" action="/listings/my-requests" method="get">
-            <div class="button">
-              <input type="submit" name="my-requests" value="My requests">
-            </div>
-          </form>
-        <% else %>
-          <form class="" action="/login" method="get">
-            <div class="button">
-              <input type="submit" name="login-button" value="Log in">
-            </div>
-          </form>
-          <form class="" action="/users/new" method="get">
-            <div class="button">
-              <input type="submit" name="signup-button" value="Sign up">
-            </div>
-          </form>
+      <div class="left">
+        <h1 class="welcome">Welcome, <%=(@user.name).capitalize%></h1>
+      </div>
+
+      <div class="right">
+        <form action="/sign-out" method="POST">
+          <div class="button">
+            <input type="submit" name="sign-out" id="sign-out" value="Sign out">
+          </div>
+        </form>
+        <form class="" action="/listings/my-requests" method="get">
+          <div class="button">
+            <input type="submit" name="my-requests" value="My requests">
+          </div>
+        </form>
+      <% else %>
+        <form class="" action="/login" method="get">
+          <div class="button">
+            <input type="submit" name="login-button" value="Log in">
+          </div>
+        </form>
+        <form class="" action="/users/new" method="get">
+          <div class="button">
+            <input type="submit" name="signup-button" value="Sign up">
+          </div>
+        </form>
+      </div>
+          
         <% end %>
 
         <% if @user %>
@@ -43,17 +50,20 @@
           </form>
         </div>
       <% end %>
-    
-      <h1>All listings</h1>
-    
+      <% if @user %>
+        <h1 class="center_title_logged_in">All listings</h1>
+      <% else %>
+        <h1 class="center_title_logged_out">All listings</h1>
+      <% end %>
       <h2 class="individual_listing">Book a space</h2>
 
       <div class="main-spaces">
         <% @listings.each do |list| %>
+        
           <div class="individual_listing" id="listing-<%= list.id %>">
-            <h2><%= list.name %> Price: £<%= list.price %> Available until: <%= list.dates_available%></h2>
+            <h2>Name: <%= list.name %> <br> Price: £<%= list.price %> <br> Available until: <%= list.dates_available%></h2>
             <div class="listing_image">
-              <img src="<%= list.img_url %>">
+              <img class="listings"src="<%= list.img_url %>">
             </div>
               <div class="space_description">
                 <p><%= list.description %> </p>
@@ -73,18 +83,17 @@
                       <input type="submit" value="Request this listing">
                     </form>
                   </div>
-                <% end %>
-            </div>
-              <% if @user %>
-                <% if @user.id == list.user_id %>
+                  <% if @user.id == list.user_id %>
                   <form action="/listings/<%= list.id %>/<%= @user.id %>/delete" method="post">
                     <input type='hidden' name='_method' value='DELETE'/>
                     <input type="submit" value="Delete" />
                   </form>
                 <% end %>
-              <% end %>
+                <% end %>
+            </div>
+          
             <% end %>
         </div>
-      </div>
+      
   </body>
 </html>

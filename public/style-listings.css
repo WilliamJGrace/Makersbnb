@@ -1,13 +1,29 @@
-body.background {
-  /* background: url(https://cdn.cnn.com/cnnnext/dam/assets/181115161449-11-japanese-ryokans-nishimuraya.jpg);
+/* body {
+  text-align: center;
+  background-image: url(https://cdn.cnn.com/cnnnext/dam/assets/181115161449-11-japanese-ryokans-nishimuraya.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  z-index: -1; */
-  background-color: white;
+  max-width: 100%;
+  max-height: 100%;
+  opacity: 0.9;
+} */
+
+body {
+  background-image: url(https://i.pinimg.com/originals/ba/ef/ce/baefcefd89c64d7232df82a919007848.jpg);
+  text-align: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 0% 90%;
 }
-div.please {
-  color: black;
-  /* background-color: rgba(0, 0, 0, 0.5); */
+
+.welcome {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: max-content;
+  margin-left: 44%;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 div.button {
@@ -18,8 +34,15 @@ h2:hover {
   text-decoration: underline;
 }
 
-h1 {
+h1.center_title_logged_out {
   text-align: center;
+  margin-left: 9%;
+  font-size: 30px;
+}
+
+h1.center_title_logged_in {
+  text-align: center;
+  margin-left: 18%;
   font-size: 30px;
 }
 
@@ -65,13 +88,26 @@ form {
 }
 
 .individual_listing {
+  background-color: rgba(192, 192, 192, 0.8);
   margin-left: 15%;
   margin-right: 15%;
   margin-bottom: 5px;
   border: 3px solid black;
   padding: 5px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+img.listings {
+  margin-left: 50%;
+  max-width: 100%;
+  max-height: 100%;
+  border: black solid;
 }
 
 div.listing_image {
+  height: 300px;
+  width: 800px;
   
 }
+
