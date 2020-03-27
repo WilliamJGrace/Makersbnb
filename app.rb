@@ -2,6 +2,7 @@ require 'sinatra/base'
 require './lib/Listing'
 require './lib/User'
 require './lib/requests'
+require './database_connection_setup'
 require 'pg'
 require 'sinatra/flash'
 
@@ -94,7 +95,7 @@ class Makers_Bnb < Sinatra::Base
     Requests.delete_request(id: params[:request_id])
     redirect '/listings/my-requests'
   end
-  
+
   patch '/listings/:request_id/confirm-request' do
     Requests.confirm_booking(id: params[:request_id])
     redirect '/listings/my-requests'

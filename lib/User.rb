@@ -1,10 +1,12 @@
 require 'pg'
 require 'bcrypt'
+require_relative 'database_connection'
 
 class User
 attr_reader :id, :email, :name, :username, :password
 
   def self.create(email:, name:, username:, password: )
+
     if ENV['ENVIRONMENT'] == "test"
       connect = PG.connect(dbname: "makersbnb_test")
     else
@@ -27,22 +29,14 @@ attr_reader :id, :email, :name, :username, :password
   end
 
   def self.find(id)
-    if ENV['ENVIRONMENT'] == "test"
-      connect = PG.connect(dbname: "makersbnb_test")
-    else
-      connect = PG.connect(dbname: "makersbnb")
-    end
-    result = connect.exec("SELECT * FROM users WHERE id = '#{id}';")
+
+    result = DatabaseConnection.query("SELECT * FROM users WHERE id = '#{id}';")
     User.new(id: result[0]['id'], email: result[0]['email'],name: result[0]['name'], username: result[0]['username'], password: result[0]['password'])
   end
 
   def self.authenticate(username:, password:)
-    if ENV['ENVIRONMENT'] == "test"
-      connect = PG.connect(dbname: "makersbnb_test")
-    else
-      connect = PG.connect(dbname: "makersbnb")
-    end
-    result = connect.exec("SELECT * FROM users WHERE username = '#{username}';")
+
+    result = DatabaseConnection.query("SELECT * FROM users WHERE username = '#{username}';")
     return unless result.any?
     return unless BCrypt::Password.new(result[0]['password']) == password
 

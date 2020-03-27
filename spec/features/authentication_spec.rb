@@ -7,7 +7,7 @@ feature 'authentication' do
     fill_in(:username, with: 'testing123')
     fill_in(:password, with: 'password456')
     click_button('Sign in')
-    expect(page).to have_content 'Welcome, test'
+    expect(page).to have_content 'Welcome, Test'
   end
 
   it 'can let a user sign out' do
@@ -17,9 +17,9 @@ feature 'authentication' do
     fill_in(:username, with: 'testing123')
     fill_in(:password, with: 'password456')
     click_button('Sign in')
-    click_button('Sign out') 
+    click_button('Sign out')
 
-    expect(page).not_to have_content 'Welcome, test'
+    expect(page).not_to have_content 'Welcome, Test'
     expect(page).to have_content 'You have signed out'
   end
 end
