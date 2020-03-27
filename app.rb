@@ -2,7 +2,7 @@ require 'sinatra/base'
 require './lib/Listing'
 require './lib/User'
 require './lib/requests'
-require './database_connection_setup'
+require_relative './database_connection_setup.rb'
 require 'pg'
 require 'sinatra/flash'
 

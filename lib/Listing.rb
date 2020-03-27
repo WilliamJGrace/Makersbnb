@@ -1,5 +1,5 @@
-require 'pg'
-require './database_connection_setup'
+
+require_relative 'database_connection'
 
 
 class Listing
