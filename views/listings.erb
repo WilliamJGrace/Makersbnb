@@ -3,84 +3,97 @@
   <head>
     <meta charset="utf-8">
     <title>All Spaces</title>
+    <link rel='stylesheet' type='text/css' href='style-listings.css'>
   </head>
+  
   <body>
-  <link rel='stylesheet' type='text/css' href='style-listings.css'>
-    <% if @user %>
-    <h1>Welcome, <%=(@user.name).capitalize%></h1>
-    <form action="/sign-out" method="POST">
-      <input type="submit" name="sign-out" id="sign-out" value="Sign out">
-    </form>
-    <form class="" action="/listings/my-requests" method="get">
-      <input type="submit" name="my-requests" value="My requests">
-    </form>
-    <% else %>
-    <form class="" action="/login" method="get">
-      <input type="submit" name="login-button" value="Log in">
-    </form>
-    <form class="" action="/users/new" method="get">
-      <input type="submit" name="signup-button" value="Sign up">
-    </form>
-
-
-
-    <% end %>
-
-
-
-    <h2>Book a Listing</h2>
-
-    <% if @user %>
-
-    <div class="add-spaces">
-      <form action="listings/<%=@user.id%>/new">
-        <button type="submit" >Add Listing</button>
-      </form>
-
-    </div>
-    <% end %>
-
-
-    <h1>All listings</h1>
-    <h2>Book a space</h2>
-<div class="main-spaces">
-    <% @listings.each do |list| %>
-
-    <div class="listing" id="listing-<%= list.id %>">
-
-      <h2><%= list.name %> Price: £<%= list.price %> Available until: <%= list.dates_available%></h2>
-      <img src="<%= list.img_url %>" >
-      <div class="space_description">
-          <p><%= list.description %> </p>
+    <!-- <div class="background_image"><img src="https://i.pinimg.com/originals/ba/ef/ce/baefcefd89c64d7232df82a919007848.jpg" alt=""></div> -->
+    
+      <% if @user %>
+      <div class="left">
+        <h1 class="welcome">Welcome, <%=(@user.name).capitalize%></h1>
       </div>
-      <% if @user %>
-        <% if @user.id == list.user_id %>
-      <form action="/listings/<%= list.id %>/<%= @user.id %>/edit" method="get">
-        <input type="submit" value="edit listing" />
-      </form>
-        <% end %>
-      <% end %>
-      <% if @user %>
-      <div class="request-spaces">
-        <label>Date that you would like to stay:</label>
-        <form method="post" action="/listings/<%=list.id%>/request">
-          <input type="date" id="dates_booked" name="dates_booked">
-          <input type="submit" value="Request this listing">
+
+      <div class="right">
+        <form action="/sign-out" method="POST">
+          <div class="button">
+            <input type="submit" name="sign-out" id="sign-out" value="Sign out">
+          </div>
         </form>
-    </div>
-    <% end %>
-    </div>
-    <% if @user %>
-      <% if @user.id == list.user_id %>
-    <form action="/listings/<%= list.id %>/<%= @user.id %>/delete" method="post">
-      <input type='hidden' name='_method' value='DELETE'/>
-      <input type="submit" value="Delete" />
-    </form>
+        <form class="" action="/listings/my-requests" method="get">
+          <div class="button">
+            <input type="submit" name="my-requests" value="My requests">
+          </div>
+        </form>
+      <% else %>
+        <form class="" action="/login" method="get">
+          <div class="button">
+            <input type="submit" name="login-button" value="Log in">
+          </div>
+        </form>
+        <form class="" action="/users/new" method="get">
+          <div class="button">
+            <input type="submit" name="signup-button" value="Sign up">
+          </div>
+        </form>
+      </div>
+          
+        <% end %>
+
+        <% if @user %>
+
+        <div class="add-spaces">
+          <form action="listings/<%=@user.id%>/new">
+            <div class="button">
+              <button type="submit">Add Listing</button>
+            </div>
+          </form>
+        </div>
       <% end %>
-    <% end %>
+      <% if @user %>
+        <h1 class="center_title_logged_in">All listings</h1>
+      <% else %>
+        <h1 class="center_title_logged_out">All listings</h1>
+      <% end %>
+      <h2 class="individual_listing">Book a space</h2>
 
-       <% end %>
-    </div>
-
+      <div class="main-spaces">
+        <% @listings.each do |list| %>
+        
+          <div class="individual_listing" id="listing-<%= list.id %>">
+            <h2>Name: <%= list.name %> <br> Price: £<%= list.price %> <br> Available until: <%= list.dates_available%></h2>
+            <div class="listing_image">
+              <img class="listings"src="<%= list.img_url %>">
+            </div>
+              <div class="space_description">
+                <p><%= list.description %> </p>
+              </div>
+            <% if @user %>
+              <% if @user.id == list.user_id %>
+                <form action="/listings/<%= list.id %>/<%= @user.id %>/edit" method="get">
+                  <input type="submit" value="edit listing" />
+                </form>
+              <% end %>
+            <% end %>
+              <% if @user %>
+                <div class="request-spaces">
+                  <label>Date that you would like to stay:</label>
+                    <form method="post" action="/listings/<%=list.id%>/request">
+                      <input type="date" id="dates_booked" name="dates_booked">
+                      <input type="submit" value="Request this listing">
+                    </form>
+                  </div>
+                  <% if @user.id == list.user_id %>
+                  <form action="/listings/<%= list.id %>/<%= @user.id %>/delete" method="post">
+                    <input type='hidden' name='_method' value='DELETE'/>
+                    <input type="submit" value="Delete" />
+                  </form>
+                <% end %>
+                <% end %>
+            </div>
+          
+            <% end %>
+        </div>
+      
   </body>
 </html>

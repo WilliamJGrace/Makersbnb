@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <link rel='stylesheet' type='text/css' href='/new_space.css'>
     <meta charset="utf-8">
     <title>List a new space</title>
   </head>
   <body>
-   <form action="/listings/<%= @user_id %>/new" method="POST">
-      <label>Add a new space</label><br>
-      <label>name your space:</label>
-      <input type="text" name="name"><br>
-      <label>Description:</label>
-      <input type="text" name="description"><br>
-      <label>Price</label>
-      <input type="text" name="price"><br>
-      <label>dates available</label>
-      <input type="date" name="dates_available"><br>
-      <label>Image URL</label>
-      <input type="text" name="img_url"><br>
-      <input type="submit" value="Submit"><br>
-    </form>
+    <div class="body-opacity">
+      <div class="center">
+        <form action="/listings/<%= @user_id %>/new" method="POST">
+          <label class="label_title">Add a new space</label><br><br>
+          <label class="label">Name your space:</label><br>
+          <input class="input" type="text" name="name"><br>
+          <label class="label">Description:</label><br>
+          <input class="input" type="text" name="description"><br>
+          <label class="label">Price:</label><br>
+          <input class="input"type="text" name="price"><br>
+          <label class="label">Dates available:</label><br>
+          <input class="input" type="date" name="dates_available"><br>
+          <label class="label">Image URL</label><br>
+          <input class="input" type="text" name="img_url"><br>
+          <input type="submit" value="Submit" class="submit_button"><br>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
