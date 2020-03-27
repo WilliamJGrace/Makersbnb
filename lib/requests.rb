@@ -1,5 +1,5 @@
 require 'pg'
-require_relative 'database_connection'
+require './database_connection_setup'
 
 
 class Requests
