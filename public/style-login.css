@@ -1,0 +1,65 @@
+h1 {
+  text-align: center;
+  color: white;
+}
+
+h1:hover {
+  color: crimson;
+}
+
+body {
+  background-image: url("https://media.cntraveler.com/photos/5d112d50c4d7bd806dbc00a4/master/w_2251,h_1500,c_limit/airbnb%20luxe.jpg");
+  background-size: cover;
+}
+
+label {
+  text-align: center;
+  }
+
+  input {
+    text-align: center;
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 15px;
+    transition: width 0.4s ease-in-out;
+    border-radius: 10px;
+  }
+
+  label {
+    text-align: center;
+    width: 50px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 20px;
+    background-color: white; 
+    padding: 5px;
+    transition: width 0.4s ease-in-out;
+    margin: auto;
+    border-radius: 10px;
+  }
+  
+  input:focus {
+    width: 30%;
+    border-radius: 10px;
+  }
+  
+  form {
+    text-align: center;
+    align-items: center;
+    margin: auto;
+  }
+
+  p {
+    line-height: 500%;
+  }
+
+
+  
