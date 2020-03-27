@@ -1,4 +1,4 @@
-
+require 'pg'
 require 'bcrypt'
 require_relative 'database_connection'
 
