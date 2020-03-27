@@ -1,0 +1,37 @@
+body {
+  background-image: url("https://www.telegraph.co.uk/content/dam/Travel/ski/luxe-ski-airbnb-saint-gervais-lounge.jpg");
+  background-size: cover;
+}
+
+h1 {
+  text-align: center;
+  color: white
+}
+
+h2 {
+  text-align: center;
+  color: white
+}
+
+form {
+  text-align: center;
+  align-items: center;
+  margin: auto;
+}
+
+input {
+  background-color: white;
+  color: black; 
+  box-sizing: border-box;
+  border: 2px solid white;
+  font-size: 25px; 
+  border-radius: 25px;
+  padding: 20px;
+  transition-duration: 0.7s;
+  text-align: center;
+}
+
+input:hover {
+  background-color: crimson;
+  color: white;
+}
