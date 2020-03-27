@@ -5,7 +5,7 @@ feature 'registration' do
     fill_in('name', with: 'test')
     fill_in('username', with: 'testing123')
     fill_in('password', with: 'password123')
-    click_button('Submit')
+    click_button('Sign up')
 
     expect(page).to have_content "Welcome, Test"
   end
@@ -16,13 +16,13 @@ feature 'registration' do
     fill_in('name', with: 'test')
     fill_in('username', with: 'testing123')
     fill_in('password', with: 'password123')
-    click_button('Submit')
+    click_button('Sign up')
     visit '/users/new'
     fill_in('email', with: 'test@example.com')
     fill_in('name', with: 'test')
     fill_in('username', with: 'testing123')
     fill_in('password', with: 'password123')
-    click_button('Submit')
+    click_button('Sign up')
     expect(page).to have_content "username already taken"
 
 
