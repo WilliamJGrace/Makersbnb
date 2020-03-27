@@ -2,56 +2,71 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>My bookings</title>
+    <link rel='stylesheet' type='text/css' href="<%= url('/style-my-bookings.css') %>"'>
+
   </head>
   <body>
+<div class="your-requests" id="your-requests">
+
     <h1>Your Requests:</h1>
     <% @requests.each do |request| %>
       <% if @user %>
         <% if @user.id == request.requester_user_id %>
+        <div class="individual-request" id='individual-request'>
         <h2>Listing name: <%= request.name %></h2>
         <p>Listing description: <%= request.description %></p>
-        <p>dates requested: <%= request.dates_booked %></p>
+        <p>Date requested: <%= request.dates_booked %></p>
         <p>Status: <% if request.isConfirmed == "f" %>
-                Not Confirmed
-            <% else %>
-                Confirmed
-            <% end %>
+          Not Confirmed
+          <% else %>
+          Confirmed
+          <% end %>
         </p>
         <form action="/listings/<%= request.id %>/delete-request" method="POST">
           <input type='hidden' name='_method' value='DELETE'/>
           <input type="submit" name="delete_request" id="delete_request" value="Delete this request">
         </form>
+      </div>
         <% end %>
       <% end %>
     <% end %>
+  </div>
+    <div class="requsted-listings" id='requested-listings'>
+
     <h1>Your Requested Properties:</h1>
     <% @requests.each do |request| %>
-    <% if @user %>
+
+      <% if @user %>
       <% if @user.id == request.listing_user_id %>
+      <div class="individual-requested-listing" id="individual-requested-listing">
+
       <h2>Listing name: <%= request.name %></h2>
-      <p>Who requested: <%=(User.find( request.requester_user_id)).name %></p>
+      <p>User requested: <%=(User.find( request.requester_user_id)).name %> - <%=(User.find( request.requester_user_id)).email %></p>
       <p>Listing description: <%= request.description %><p>
-      <p>Dates requested: <%= request.dates_booked %></p>
-      <p>Status: <%if request.isConfirmed == "f" %>
-              Not Confirmed
+        <p>Date requested: <%= request.dates_booked %></p>
+        <p>Status: <%if request.isConfirmed == "f" %>
+          Not Confirmed
           <% else %>
-              Your Booking is confirmed
+          Booking is confirmed
           <% end %>
 
         </p>
-      <form action="/listings/<%= request.id %>/confirm-request" method="POST">
-        <input type="hidden" name="_method" value="PATCH" />
-        <input type="submit" name="accept_request" id="accept_request" value="Accept this request">
-      </form>
-      <form action="/listings/<%= request.id %>/deny-request" method="POST">
-        <input type='hidden' name='_method' value='DELETE'/>
-        <input type="submit" name="deny_request" id="deny_request" value="Deny this request">
-      </form>
-      <% end %>
-    <% end %>
-  <% end %>
-  <form class="" action="/listings" method="get">
+        <form action="/listings/<%= request.id %>/confirm-request" method="POST">
+          <input type="hidden" name="_method" value="PATCH" />
+          <input type="submit" name="accept_request" id="accept_request" value="Accept this request">
+        </form>
+        <form action="/listings/<%= request.id %>/deny-request" method="POST">
+          <input type='hidden' name='_method' value='DELETE'/>
+          <input type="submit" name="deny_request" id="deny_request" value="Deny this request">
+        </form>
+        <% end %>
+        <% end %>
+        <% end %>
+    </div>
+</div>
+
+  <form class="" action="/listings" method="get" id="litings-button">
     <input type="submit" name="listings" value="Back to listings">
   </form>
   </body>

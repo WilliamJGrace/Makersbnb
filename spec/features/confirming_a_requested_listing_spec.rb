@@ -24,7 +24,7 @@ feature 'requesting booking' do
     click_button('Sign in')
     click_button('My requests')
     click_button('Accept this request')
-    expect(page).to have_content("Your Booking is confirmed")
+    expect(page).to have_content("Booking is confirmed")
 
 
 
