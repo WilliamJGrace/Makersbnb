@@ -3,23 +3,29 @@
   <head>
     <meta charset="utf-8">
     <title>List a new space</title>
+    <link rel='stylesheet' type='text/css' href='/edit_space.css'>
+
   </head>
   <body>
-   <form action="/listings/<%= @listing.id %>/<%= @user_id %>" method="POST">
-     <input type="hidden" name="_method" value="PATCH" />
+    <div class="body-opacity">
+      <div class="center">
+        <form action="/listings/<%= @listing.id %>/<%= @user_id %>" method="POST">
+          <input type="hidden" name="_method" value="PATCH" /> <br>
+          <label class="label_title">Edit your space</label><br>
+          <p><label class="label">name</label><br> </p> 
+          <input class="input" type="text" name="name" value="<%= @listing.name %>"><br>
+          <label class="label">Description:</label> <br>
+          <input class="input" type="text" name="description" value="<%= @listing.description %>"><br>
+          <label class="label">Price</label> <br>
+          <input class="input" type="number" min="1" step="any" name="price" value="<%= @listing.price %>"><br>
+          <label class="label">dates available</label> <br>
+          <input class="input" type="date" name="dates_available" "<%= @listing.dates_available %>"><br>
+          <label class="label">Image URL</label> <br>
+          <input class="input" type="text" name="img_url" value="<%= @listing.img_url %>"><br>
+          <input class="submit_button" type="submit" value="Submit"><br>
+        </form>
+      </div>
 
-      <label>Edit your space</label><br>
-      <label>name</label>
-      <input type="text" name="name" value="<%= @listing.name %>"><br>
-      <label>Description:</label>
-      <input type="text" name="description" value="<%= @listing.description %>"><br>
-      <label>Price</label>
-      <input type="number" min="1" step="any" name="price" value="<%= @listing.price %>"><br>
-      <label>dates available</label>
-      <input type="date" name="dates_available" "<%= @listing.dates_available %>"><br>
-      <label>Image URL</label>
-      <input type="text" name="img_url" value="<%= @listing.img_url %>"><br>
-      <input type="submit" value="Submit"><br>
-    </form>
+    </div>
   </body>
 </html>
