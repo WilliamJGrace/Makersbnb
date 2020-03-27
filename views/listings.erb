@@ -5,6 +5,7 @@
     <title>All Spaces</title>
   </head>
   <body>
+  <link rel='stylesheet' type='text/css' href='style-listings.css'>
     <% if @user %>
     <h1>Welcome, <%=(@user.name).capitalize%></h1>
     <form action="/sign-out" method="POST">
@@ -26,7 +27,9 @@
     <% end %>
 
 
+
     <h2>Book a Listing</h2>
+
     <% if @user %>
 
     <div class="add-spaces">
@@ -39,6 +42,7 @@
 
 
     <h1>All listings</h1>
+    <h2>Book a space</h2>
 <div class="main-spaces">
     <% @listings.each do |list| %>
 
