@@ -1,0 +1,61 @@
+body {
+  text-align: center;
+  background: url(https://cdn.cnn.com/cnnnext/dam/assets/181115161449-11-japanese-ryokans-nishimuraya.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  opacity: 0.9;
+}
+
+.center {
+  margin-top: 10%;
+}
+
+.label_title {
+  font-size: 30px;
+  background-color: black;
+  opacity: 0.8;
+  padding: 3px;
+  border-radius: 10px;
+}
+.label {
+  font-size: 20px;
+  background-color: black;
+  opacity: 0.8;
+  padding: 2px;
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.input {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.input:focus {
+  width: 15%
+}
+
+.submit_button {
+  margin-top: 10px;
+  background-color:	rgb(139,0,0);
+  opacity: 0.8;
+  color: white;
+}
+
+.submit_button:hover {
+  background-color: rgb(0,51,25);
+}
+
+input {
+  background-color: white;
+  color: black; 
+  box-sizing: border-box;
+  border: 1px solid white;
+  font-size: 20px; 
+  border-radius: 10px;
+  padding: 5px;
+  transition-duration: 0.2s;
+  text-align: center;
+}
