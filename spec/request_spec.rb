@@ -44,4 +44,14 @@ describe Requests do
     end
 
   end
+
+  describe '.delete_request' do
+    it "can delete a request" do
+      user = User.create(email: "test@makers.com", name: "will", username: "will123", password: "password456")
+      listing = Listing.create(user_id: user.id, name: "Peter Stevens", description: "Pandemic and chill, £100.00 a night", price: 700, dates_available: "2020/03/31", img_url: "https://www.carehome.co.uk/photos/gallery/large/10002514BREA-1.jpg")
+      request = Requests.create(listing_user_id: user.id, requester_user_id: user.id, listing_id: listing.id, name: listing.name, description: listing.description, price: listing.price, dates_booked: '01/01/01 - 02/02/02')
+      deleted_request = Requests.delete_request(id: request.id)
+      expect(Requests.all.length).to eq 0
+    end
+  end
 end

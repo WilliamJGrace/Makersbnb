@@ -85,13 +85,22 @@ class Makers_Bnb < Sinatra::Base
     @requests = Requests.all
     erb :my_bookings
   end
-
-  patch '/listings/:request_id/confirm-request' do
-    Requests.confirm_booking(id: params[:request_id])
-
-    # connect.exec("UPDATE requests SET isconfirmed = TRUE WHERE id = '#{params[:request_id]}';")
+  delete '/listings/:request_id/delete-request' do
+    Requests.delete_request(id: params[:request_id])
     redirect '/listings/my-requests'
   end
+
+  delete '/listings/:request_id/deny-request' do
+    Requests.delete_request(id: params[:request_id])
+    redirect '/listings/my-requests'
+  end
+  
+  patch '/listings/:request_id/confirm-request' do
+    Requests.confirm_booking(id: params[:request_id])
+    redirect '/listings/my-requests'
+  end
+
+
 
   patch '/listings/:listing_id/:user_id' do
     Listing.update(id: params[:listing_id], name: params[:name], description: params[:description], price: params[:price], dates_available: params[:dates_available], img_url: params[:img_url])

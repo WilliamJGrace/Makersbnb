@@ -7,7 +7,7 @@
   <body>
   <link rel='stylesheet' type='text/css' href='style-listings.css'>
     <% if @user %>
-    <h1>Welcome, <%=@user.name%></h1>
+    <h1>Welcome, <%=(@user.name).capitalize%></h1>
     <form action="/sign-out" method="POST">
       <input type="submit" name="sign-out" id="sign-out" value="Sign out">
     </form>
@@ -27,6 +27,9 @@
     <% end %>
 
 
+
+    <h2>Book a Listing</h2>
+
     <% if @user %>
 
     <div class="add-spaces">
@@ -44,11 +47,11 @@
     <% @listings.each do |list| %>
 
     <div class="listing" id="listing-<%= list.id %>">
-       
+
       <h2><%= list.name %> Price: £<%= list.price %> Available until: <%= list.dates_available%></h2>
       <img src="<%= list.img_url %>" >
       <div class="space_description">
-          <%= list.description %>
+          <p><%= list.description %> </p>
       </div>
       <% if @user %>
         <% if @user.id == list.user_id %>
@@ -59,8 +62,9 @@
       <% end %>
       <% if @user %>
       <div class="request-spaces">
+        <label>Date that you would like to stay:</label>
         <form method="post" action="/listings/<%=list.id%>/request">
-          <input type="text" id="dates_booked" name="dates_booked">
+          <input type="date" id="dates_booked" name="dates_booked">
           <input type="submit" value="Request this listing">
         </form>
     </div>

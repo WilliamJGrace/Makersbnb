@@ -9,15 +9,19 @@
     <% @requests.each do |request| %>
       <% if @user %>
         <% if @user.id == request.requester_user_id %>
-        <h1><%= request.name %></h1>
-        <h3><%= request.description %></h3>
-        <h3><%= request.dates_booked %></h3>
-        <h4><% if request.isConfirmed == "f" %>
+        <h2>Listing name: <%= request.name %></h2>
+        <p>Listing description: <%= request.description %></p>
+        <p>dates requested: <%= request.dates_booked %></p>
+        <p>Status: <% if request.isConfirmed == "f" %>
                 Not Confirmed
             <% else %>
                 Confirmed
             <% end %>
-        </h4>
+        </p>
+        <form action="/listings/<%= request.id %>/delete-request" method="POST">
+          <input type='hidden' name='_method' value='DELETE'/>
+          <input type="submit" name="delete_request" id="delete_request" value="Delete this request">
+        </form>
         <% end %>
       <% end %>
     <% end %>
@@ -25,24 +29,30 @@
     <% @requests.each do |request| %>
     <% if @user %>
       <% if @user.id == request.listing_user_id %>
-      <h1><%= request.name %></h1>
-      <h3><%= request.description %></h3>
-      <h3><%= request.dates_booked %></h3>
-      <h4><%if request.isConfirmed == "f" %>
+      <h2>Listing name: <%= request.name %></h2>
+      <p>Who requested: <%=(User.find( request.requester_user_id)).name %></p>
+      <p>Listing description: <%= request.description %><p>
+      <p>Dates requested: <%= request.dates_booked %></p>
+      <p>Status: <%if request.isConfirmed == "f" %>
               Not Confirmed
           <% else %>
               Your Booking is confirmed
           <% end %>
 
-        </h4>
+        </p>
       <form action="/listings/<%= request.id %>/confirm-request" method="POST">
         <input type="hidden" name="_method" value="PATCH" />
         <input type="submit" name="accept_request" id="accept_request" value="Accept this request">
-      <form action="">
+      </form>
+      <form action="/listings/<%= request.id %>/deny-request" method="POST">
+        <input type='hidden' name='_method' value='DELETE'/>
         <input type="submit" name="deny_request" id="deny_request" value="Deny this request">
       </form>
       <% end %>
     <% end %>
   <% end %>
+  <form class="" action="/listings" method="get">
+    <input type="submit" name="listings" value="Back to listings">
+  </form>
   </body>
 </html>
