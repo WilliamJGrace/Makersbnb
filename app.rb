@@ -87,12 +87,9 @@ class Makers_Bnb < Sinatra::Base
   end
 
   patch '/listings/:request_id/confirm-request' do
-    if ENV['ENVIRONMENT'] == 'test'
-        connect = PG.connect(dbname: "makersbnb_test")
-    else
-      connect = PG.connect(dbname: "makersbnb")
-    end
-    connect.exec("UPDATE requests SET isconfirmed = TRUE WHERE id = '#{params[:request_id]}';")
+    Requests.confirm_booking(id: params[:request_id])
+
+    # connect.exec("UPDATE requests SET isconfirmed = TRUE WHERE id = '#{params[:request_id]}';")
     redirect '/listings/my-requests'
   end
 
