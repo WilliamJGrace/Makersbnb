@@ -7,7 +7,7 @@ feature 'registration' do
     fill_in('password', with: 'password123')
     click_button('Submit')
 
-    expect(page).to have_content "Welcome, test"
+    expect(page).to have_content "Welcome, Test"
   end
 
   scenario 'A user cant sign up with an already used username' do

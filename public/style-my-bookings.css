@@ -1,0 +1,71 @@
+
+
+div.button {
+  float: right;
+}
+
+h2:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  text-align: center;
+  font-size: 30px;
+  color: crimson;
+}
+
+h1:hover {
+  text-decoration: underline;
+}
+
+input {
+  background-color: white;
+  color: black;
+  box-sizing: border-box;
+  border: 2px solid black;
+  font-size: 20px;
+  border-radius: 20px;
+  padding: 10px;
+  transition-duration: 0.4s;
+  text-align: right;
+}
+
+input:hover {
+  background-color: crimson;
+  color: white;
+}
+
+button {
+  background-color: white;
+  color: black;
+  box-sizing: border-box;
+  border: 2px solid black;
+  font-size: 20px;
+  border-radius: 20px;
+  padding: 10px;
+  transition-duration: 0.4s;
+  text-align: left;
+}
+
+button:hover {
+  background-color: crimson;
+  color: white;
+}
+
+
+
+
+#individual-request {
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-bottom: 5px;
+  border: 3px solid black;
+  padding: 5px;
+}
+#individual-requested-listing {
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-bottom: 5px;
+  border: 3px solid black;
+  padding: 5px;
+}
